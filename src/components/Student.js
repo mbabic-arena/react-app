@@ -33,6 +33,7 @@ const Student = ({ match, history }) => {
 
     const save = () => {
         if(id === '0') {
+            student._id = undefined;
             insert('students', student, data => {
                 if(data) return history.push('/students');
                 console.log('There was error during save data');
