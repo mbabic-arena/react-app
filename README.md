@@ -3,7 +3,6 @@
 [![Version](https://img.shields.io/npm/v/react-app.svg)](https://www.npmjs.com/package/react-app)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](github.com/mbabic-arena/react-app#readme)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](github.com/mbabic-arena/react-app/graphs/commit-activity)
-[![License: ISC](https://img.shields.io/github/license/mbabic-arena/react-app)](github.com/mbabic-arena/react-app/blob/master/LICENSE)
 
 > My First React App
 
