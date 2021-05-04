@@ -9,6 +9,9 @@ const Course = ({ match, history }) => {
         name: '',
         points: 0
     });
+    const [nameRequired, setNameRequired] = useState(false);
+    const [pointsRequired, setPointsRequired] = useState(false);
+
 
     useEffect(() => {
         if(id !== '0') {
@@ -19,6 +22,12 @@ const Course = ({ match, history }) => {
     }, [id]);
 
     function changeHandler(e) {
+        if(e.target.name && e.target.value === "name") {
+            setNameRequired(false);
+        }
+        if(e.target.name && e.target.value === "points"){
+            setPointsRequired(false);
+        }
         setCourse({
             ...course,
             [e.target.name]: e.target.value
@@ -31,12 +40,38 @@ const Course = ({ match, history }) => {
 
     const save = () => {
         if(id === '0') {
+            if(!course.name && !course.points) {
+                setNameRequired(true);
+                setPointsRequired(true);
+                return;
+            }
+            if(!course.name){
+                setNameRequired(true);
+                return;
+            }
+            if(!course.points){
+                setPointsRequired(true);
+                return;
+            }
             course._id = undefined;
             insert('courses', course, data => {
                 if(data) return history.push('/courses');
                 console.log('There was error during save data');
             })
         } else {
+            if(!course.name && !course.points) {
+                setNameRequired(true);
+                setPointsRequired(true);
+                return;
+            }
+            if(!course.name){
+                setNameRequired(true);
+                return;
+            }
+            if(!course.points){
+                setPointsRequired(true);
+                return;
+            }
             update('courses', id, course, data => {
                 if(data) return history.push('/courses');
                 console.log('There was error during save data');
@@ -55,18 +90,22 @@ const Course = ({ match, history }) => {
         <h2>Course</h2>
         <form className='input-form'>
             <div style={{margin:'12px 0'}}>
-                <label htmlFor='name'>Course name:</label>
+                <label htmlFor='name'>Course name: </label>
                 <input type='text'
                 name='name'
                 value={course.name}
-                onChange={changeHandler} />
+                onChange={changeHandler}
+                required />
+                {nameRequired && <p className="alert">The "Course name" field must be filled in!</p>}
             </div>
             <div style={{margin:'12px 0'}}>
-                <label htmlFor='points'>Course points:</label>
+                <label htmlFor='points'>Course points: </label>
                 <input type='text'
                 name='points'
                 value={course.points}
-                onChange={changeHandler} />
+                onChange={changeHandler}
+                required />
+                {pointsRequired && <p className="alert">The "Course points" field must be filled in!</p>}
             </div>
             <hr />
             {id !== '0' && (
